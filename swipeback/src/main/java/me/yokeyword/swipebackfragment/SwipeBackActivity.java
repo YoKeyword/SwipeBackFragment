@@ -42,9 +42,10 @@ public class SwipeBackActivity extends AppCompatActivity {
                 Fragment fragment = fragments.get(i);
                 if (fragment != null) {
                     if (!showFlag) {
+                        ft.show(fragment);
                         showFlag = true;
                     } else {
-                        ft.hide(fragments.get(i));
+                        ft.hide(fragment);
                     }
                 }
             }
