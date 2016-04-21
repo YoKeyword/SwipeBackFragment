@@ -21,7 +21,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 1、项目下app的build.gradle中依赖：
 ````gradle
 // appcompat v7包是必须的
-compile 'me.yokeyword:swipebackfragment:0.1.1'
+compile 'me.yokeyword:swipebackfragment:0.1.1' // 还在审核中，明天才可以 ＝。＝
 ````
 2、如果Activity也需要支持SwipeBack，则继承SwipeBackActivity:
 ````java
