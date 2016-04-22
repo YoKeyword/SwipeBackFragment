@@ -3,7 +3,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 
 滑动Fragment&Activity边缘即可类似IOS一样，拖动返回。
 
-原理分析：[传送门](http://www.jianshu.com/p/626229ca4dc2)
+原理分析：[传送门](http://www.jianshu.com/p/626229ca4dc2),  如果你重度使用Fragment，不妨看看这个库[Fragmentation](https://github.com/YoKeyword/Fragmentation)
 
 # 特性
 1、Activity内Fragment数大于1时，滑动返回的是Fragment，否则滑动返回的是Activity。
