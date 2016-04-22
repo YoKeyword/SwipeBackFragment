@@ -46,8 +46,9 @@ public class SwipeBackSampleFragment extends SwipeBackFragment {
 
 更多方法:
 ````java
+  // 设置滑动方向
   getSwipeBackLayout().setEdgeOrientation(SwipeBackLayout.EDGE_RIGHT); // EDGE_LEFT(默认),EDGE_ALL
-
+  // 滑动过程监听
   getSwipeBackLayout().addSwipeListener(new SwipeBackLayout.OnSwipeListener() {
             @Override
             public void onDragStateChange(int state) {
