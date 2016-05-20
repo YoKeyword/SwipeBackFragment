@@ -34,15 +34,9 @@ public class FirstSwipeBackFragment extends BaseSwipeBackFragment {
 
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         mToolbar.setTitle("SwipeBackActivity的Fragment");
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
+        _initToolbar(mToolbar);
 
-        view.findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tv_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mAddFragmentListener != null) {

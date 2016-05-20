@@ -20,7 +20,7 @@ public class BaseSwipeBackFragment extends SwipeBackFragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                getActivity().onBackPressed();
             }
         });
     }
