@@ -24,14 +24,13 @@ public class SwipeBackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            processSaveInstanceState(savedInstanceState);
+        if (savedInstanceState != null && restoreInstanceState()) {
+            processRestoreInstanceState();
         }
-
         onActivityCreate();
     }
 
-    protected void processSaveInstanceState(Bundle savedInstanceState) {
+    private void processRestoreInstanceState() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
 
         if (fragments != null && fragments.size() > 0) {
@@ -51,6 +50,15 @@ public class SwipeBackActivity extends AppCompatActivity {
             }
             ft.commit();
         }
+    }
+
+    /**
+     * 内存重启后,是否让Fragmentation帮你恢复Fragment状态
+     *
+     * @return
+     */
+    protected boolean restoreInstanceState() {
+        return true;
     }
 
     @Override
