@@ -4,13 +4,9 @@ package me.yokeyword.swipebackfragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.List;
 
 
 /**
@@ -24,41 +20,7 @@ public class SwipeBackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null && restoreInstanceState()) {
-            processRestoreInstanceState();
-        }
         onActivityCreate();
-    }
-
-    private void processRestoreInstanceState() {
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-
-        if (fragments != null && fragments.size() > 0) {
-            boolean showFlag = false;
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            for (int i = fragments.size() - 1; i >= 0; i--) {
-                Fragment fragment = fragments.get(i);
-                if (fragment != null) {
-                    if (!showFlag) {
-                        ft.show(fragment);
-                        showFlag = true;
-                    } else {
-                        ft.hide(fragment);
-                    }
-                }
-            }
-            ft.commit();
-        }
-    }
-
-    /**
-     * 内存重启后,是否让Fragmentation帮你恢复Fragment状态
-     *
-     * @return
-     */
-    protected boolean restoreInstanceState() {
-        return true;
     }
 
     @Override
