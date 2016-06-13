@@ -43,7 +43,7 @@ public class SecondSwipeBackFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 if (mAddFragmentListener != null) {
-                    mAddFragmentListener.onAddFragment(ThirdSwipeBackFragment.newInstance());
+                    mAddFragmentListener.onAddFragment(SecondSwipeBackFragment.this, ThirdSwipeBackFragment.newInstance());
                 }
             }
         });
@@ -68,7 +68,7 @@ public class SecondSwipeBackFragment extends BaseSwipeBackFragment {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         _initToolbar(mToolbar);
 
-        Button btnSet = (Button)view.findViewById(R.id.btn_set);
+        Button btnSet = (Button) view.findViewById(R.id.btn_set);
         btnSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

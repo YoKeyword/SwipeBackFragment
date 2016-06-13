@@ -52,7 +52,7 @@ public class RecyclerSwipeBackFragment extends BaseSwipeBackFragment {
             @Override
             public void onItemClick(int position, View view) {
                 if (mAddFragmentListener != null) {
-                    mAddFragmentListener.onAddFragment(FirstSwipeBackFragment.newInstance());
+                    mAddFragmentListener.onAddFragment(RecyclerSwipeBackFragment.this, FirstSwipeBackFragment.newInstance());
                 }
             }
         });

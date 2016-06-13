@@ -42,7 +42,7 @@ public class ThirdSwipeBackFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 if (mAddFragmentListener != null) {
-                    mAddFragmentListener.onAddFragment(RecyclerSwipeBackFragment.newInstance());
+                    mAddFragmentListener.onAddFragment(ThirdSwipeBackFragment.this, RecyclerSwipeBackFragment.newInstance());
                 }
             }
         });

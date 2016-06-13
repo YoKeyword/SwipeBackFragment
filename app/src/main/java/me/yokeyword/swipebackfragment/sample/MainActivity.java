@@ -16,7 +16,7 @@ public class MainActivity extends SwipeBackActivity implements BaseSwipeBackFrag
 
         if (savedInstanceState == null) {
             FirstSwipeBackFragment firstFragment = FirstSwipeBackFragment.newInstance();
-            addFragment(firstFragment);
+            loadFragment(firstFragment);
         } else {
             Toast.makeText(MainActivity.this, "啊哦,app被强杀喽~", Toast.LENGTH_LONG).show();
         }
@@ -31,17 +31,24 @@ public class MainActivity extends SwipeBackActivity implements BaseSwipeBackFrag
         }
     }
 
-    private void addFragment(Fragment fragment) {
+    private void addFragment(Fragment fromFragment, Fragment toFragment) {
         getSupportFragmentManager().beginTransaction()
-//                .setCustomAnimations(R.anim.h_fragment_enter,R.anim.h_fragment_exit)
-                .setCustomAnimations(R.anim.h_fragment_enter, 0, 0, R.anim.h_fragment_exit)
-                .add(R.id.fl_container, fragment, fragment.getClass().getSimpleName())
-                .addToBackStack(fragment.getClass().getSimpleName())
+                .setCustomAnimations(R.anim.h_fragment_enter, R.anim.h_fragment_exit, R.anim.h_fragment_pop_enter, R.anim.h_fragment_pop_exit)
+                .add(R.id.fl_container, toFragment, toFragment.getClass().getSimpleName())
+                .hide(fromFragment)
+                .addToBackStack(toFragment.getClass().getSimpleName())
+                .commit();
+    }
+
+    private void loadFragment(Fragment toFragment) {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fl_container, toFragment, toFragment.getClass().getSimpleName())
+                .addToBackStack(toFragment.getClass().getSimpleName())
                 .commit();
     }
 
     @Override
-    public void onAddFragment(Fragment fragment) {
-        addFragment(fragment);
+    public void onAddFragment(Fragment fromFragment, Fragment toFragment) {
+        addFragment(fromFragment, toFragment);
     }
 }

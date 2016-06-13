@@ -40,7 +40,7 @@ public class BaseSwipeBackFragment extends SwipeBackFragment {
         mAddFragmentListener = null;
     }
 
-    public interface OnAddFragmentListener{
-        void onAddFragment(Fragment fragment);
+    public interface OnAddFragmentListener {
+        void onAddFragment(Fragment fromFragment, Fragment toFragment);
     }
 }

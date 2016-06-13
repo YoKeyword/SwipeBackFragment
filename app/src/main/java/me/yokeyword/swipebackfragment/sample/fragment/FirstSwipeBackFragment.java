@@ -40,7 +40,7 @@ public class FirstSwipeBackFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 if (mAddFragmentListener != null) {
-                    mAddFragmentListener.onAddFragment(SecondSwipeBackFragment.newInstance());
+                    mAddFragmentListener.onAddFragment(FirstSwipeBackFragment.this, SecondSwipeBackFragment.newInstance());
                 }
             }
         });
