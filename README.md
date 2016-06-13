@@ -10,7 +10,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 
 2、支持左、右、左&右滑动（未来可能会增加更多滑动区域）
 
-3、支持Scroll中的滑动监听
+3、支持Swipe时的滑动监听
 
 4、帮你处理了Fragment重叠的情况
 
@@ -21,7 +21,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 1、项目下app的build.gradle中依赖：
 ````gradle
 // appcompat v7包是必须的
-compile 'me.yokeyword:swipebackfragment:0.1.1'
+compile 'me.yokeyword:swipebackfragment:0.2.0'
 ````
 2、如果Activity也需要支持SwipeBack，则继承SwipeBackActivity:
 ````java
