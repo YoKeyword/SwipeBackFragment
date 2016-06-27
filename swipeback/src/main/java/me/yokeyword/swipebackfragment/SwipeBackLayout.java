@@ -403,11 +403,10 @@ public class SwipeBackLayout extends FrameLayout {
         public int getViewHorizontalDragRange(View child) {
             if (mFragment != null) {
                 return 1;
-            } else {
-                if (mActivity != null && mActivity.getSupportFragmentManager().getBackStackEntryCount() == 1) {
-                    return 1;
-                }
+            } else if (mActivity != null && ((SwipeBackActivity) mActivity).swipeBackPriority()) {
+                return 1;
             }
+            
             return 0;
         }
 
@@ -445,6 +444,7 @@ public class SwipeBackLayout extends FrameLayout {
                 mCurrentSwipeOrientation = edgeFlags;
             }
         }
+
     }
 
     @Override
