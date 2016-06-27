@@ -21,7 +21,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 1、项目下app的build.gradle中依赖：
 ````gradle
 // appcompat v7包是必须的
-compile 'me.yokeyword:swipebackfragment:0.2.0'
+compile 'me.yokeyword:swipebackfragment:0.2.1'
 ````
 2、如果Activity也需要支持SwipeBack，则继承SwipeBackActivity:
 ````java
@@ -65,6 +65,21 @@ public class SwipeBackSampleFragment extends SwipeBackFragment {
                 // 滑动百分比
             }
    });
+
+    // 对于SwipeBackActivity有下面控制SwipeBack优先级的方法:
+      /**
+        * 限制SwipeBack的条件,默认栈内Fragment数 <= 1时 , 优先滑动退出Activity , 而不是Fragment
+        *
+        * 可以通过复写该方法, 自由控制优先级
+        *
+        * @return true: Activity可以滑动退出, 并且总是优先;  false: Activity不允许滑动退出
+        */
+        @Override
+        public boolean swipeBackPriority() {
+           return super.swipeBackPriority();
+           // 下面是默认实现:
+           // return getSupportFragmentManager().getBackStackEntryCount() <= 1;
+        }
 ````
 
 # 致谢
