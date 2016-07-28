@@ -4,6 +4,7 @@ package me.yokeyword.swipebackfragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
  */
 public class SwipeBackActivity extends AppCompatActivity {
     private SwipeBackLayout mSwipeBackLayout;
+    private int mDefaultFragmentBackground = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +63,18 @@ public class SwipeBackActivity extends AppCompatActivity {
      */
     public boolean swipeBackPriority() {
         return getSupportFragmentManager().getBackStackEntryCount() <= 1;
+    }
+
+    /**
+     * 当Fragment根布局 没有 设定background属性时,
+     * 库默认使用Theme的android:windowbackground作为Fragment的背景,
+     * 如果不像使用windowbackground作为背景, 可以通过该方法改变Fragment背景。
+     */
+    protected void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
+        mDefaultFragmentBackground = backgroundRes;
+    }
+
+    int getDefaultFragmentBackground() {
+        return mDefaultFragmentBackground;
     }
 }

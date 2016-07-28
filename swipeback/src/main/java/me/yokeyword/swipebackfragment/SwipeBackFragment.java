@@ -1,5 +1,7 @@
 package me.yokeyword.swipebackfragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +24,18 @@ public class SwipeBackFragment extends Fragment {
     private SwipeBackLayout mSwipeBackLayout;
     private Animation mNoAnim;
     boolean mLocking = false;
+
+    protected SwipeBackActivity _mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof SwipeBackActivity) {
+            _mActivity = (SwipeBackActivity) activity;
+        } else {
+            throw new RuntimeException(activity.toString() + " must extends SwipeBackActivity");
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,23 +88,29 @@ public class SwipeBackFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View view = getView();
-        initFragmentLayoutBg(view);
+        initFragmentBackground(view);
         if (view != null) {
             view.setClickable(true);
         }
     }
 
-    private void initFragmentLayoutBg(View view) {
-        if (view != null && !(view instanceof SwipeBackLayout) && view.getBackground() == null) {
-            int background = getWindowBackground();
-            view.setBackgroundResource(background);
+    private void initFragmentBackground(View view) {
+        if (view instanceof SwipeBackLayout) {
+            View childView = ((SwipeBackLayout) view).getChildAt(0);
+            setBackground(childView);
         } else {
-            if (view instanceof SwipeBackLayout) {
-                View childView = ((SwipeBackLayout) view).getChildAt(0);
-                if (childView != null && childView.getBackground() == null) {
-                    int background = getWindowBackground();
-                    childView.setBackgroundResource(background);
-                }
+            setBackground(view);
+        }
+    }
+
+    private void setBackground(View view) {
+        if (view != null && view.getBackground() == null) {
+            int defaultBg = _mActivity.getDefaultFragmentBackground();
+            if (defaultBg == 0) {
+                int background = getWindowBackground();
+                view.setBackgroundResource(background);
+            } else {
+                view.setBackgroundResource(defaultBg);
             }
         }
     }
