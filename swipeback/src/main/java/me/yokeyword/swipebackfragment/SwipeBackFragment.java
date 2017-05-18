@@ -1,14 +1,12 @@
 package me.yokeyword.swipebackfragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -25,16 +23,12 @@ public class SwipeBackFragment extends Fragment {
     private Animation mNoAnim;
     boolean mLocking = false;
 
-    protected SwipeBackActivity _mActivity;
+    protected Activity _mActivity;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof SwipeBackActivity) {
-            _mActivity = (SwipeBackActivity) activity;
-        } else {
-            throw new RuntimeException(activity.toString() + " must extends SwipeBackActivity");
-        }
+        _mActivity = activity;
     }
 
     @Override
@@ -105,7 +99,10 @@ public class SwipeBackFragment extends Fragment {
 
     private void setBackground(View view) {
         if (view != null && view.getBackground() == null) {
-            int defaultBg = _mActivity.getDefaultFragmentBackground();
+            int defaultBg = 0;
+            if (_mActivity instanceof SwipeBackActivity) {
+                defaultBg = ((SwipeBackActivity) _mActivity).getDefaultFragmentBackground();
+            }
             if (defaultBg == 0) {
                 int background = getWindowBackground();
                 view.setBackgroundResource(background);
