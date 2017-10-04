@@ -11,13 +11,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +86,13 @@ public class SwipeBackLayout extends FrameLayout {
     private boolean mEnable = true;
     private int mCurrentSwipeOrientation;
 
+    private Context context;
+    private EdgeLevel edgeLevel;
+
+    public enum EdgeLevel {
+        MAX, MIN, MED
+    }
+
     /**
      * The set of listeners to be sent events through.
      */
@@ -99,6 +108,7 @@ public class SwipeBackLayout extends FrameLayout {
 
     public SwipeBackLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         init();
     }
 
@@ -137,6 +147,44 @@ public class SwipeBackLayout extends FrameLayout {
 
         if (orientation == EDGE_RIGHT || orientation == EDGE_ALL) {
             setShadow(R.drawable.shadow_right, EDGE_RIGHT);
+        }
+    }
+
+    public void setEdgeLevel(EdgeLevel edgeLevel) {
+        this.edgeLevel = edgeLevel;
+        validateEdgeLevel(0, edgeLevel);
+    }
+
+    public void setEdgeLevel(int widthPixel) {
+        validateEdgeLevel(widthPixel, null);
+    }
+
+    public EdgeLevel getEdgeLevel() {
+        return edgeLevel;
+    }
+
+    private void validateEdgeLevel(int widthPixel, EdgeLevel edgeLevel) {
+        try {
+            DisplayMetrics metrics = new DisplayMetrics();
+            WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager.getDefaultDisplay().getMetrics(metrics);
+            Field mEdgeSize = mHelper.getClass().getDeclaredField("mEdgeSize");
+            mEdgeSize.setAccessible(true);
+            if (widthPixel != 0) {
+                mEdgeSize.setInt(mHelper, widthPixel);
+            } else {
+                if (edgeLevel == EdgeLevel.MAX) {
+                    mEdgeSize.setInt(mHelper, metrics.widthPixels);
+                } else if (edgeLevel == EdgeLevel.MED) {
+                    mEdgeSize.setInt(mHelper, metrics.widthPixels / 2);
+                } else if (edgeLevel == EdgeLevel.MIN) {
+                    mEdgeSize.setInt(mHelper, ((int) (20 * metrics.density + 0.5f)));
+                }
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
