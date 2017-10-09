@@ -23,7 +23,7 @@ An Android library that can finish a Fragment&amp;Activity with swipe-back gestu
 1、项目下app的build.gradle中依赖：
 ````gradle
 // appcompat v7包是必须的
-compile 'me.yokeyword:swipebackfragment:0.3.0'
+compile 'me.yokeyword:swipebackfragment:0.4.0'
 ````
 2、如果Activity也需要支持SwipeBack，则继承SwipeBackActivity:
 ````java
@@ -50,6 +50,8 @@ public class SwipeBackSampleFragment extends SwipeBackFragment {
 ````java
   // 设置滑动方向
   getSwipeBackLayout().setEdgeOrientation(SwipeBackLayout.EDGE_RIGHT); // EDGE_LEFT(默认),EDGE_ALL
+  // 设置侧滑触摸生效区域 MAX,MED,MIN,custom
+  setEdgeLevel(SwipeBackLayout.EdgeLevel edgeLevel)
   // 滑动过程监听
   getSwipeBackLayout().addSwipeListener(new SwipeBackLayout.OnSwipeListener() {
             @Override
