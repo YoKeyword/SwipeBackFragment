@@ -69,6 +69,20 @@ public class SwipeBackFragment extends Fragment {
         return mSwipeBackLayout;
     }
 
+    protected View attachToSwipeBack(View view, SwipeBackLayout.EdgeLevel edgeLevel) {
+        mSwipeBackLayout.attachToFragment(this, view);
+        mSwipeBackLayout.setEdgeLevel(edgeLevel);
+        return mSwipeBackLayout;
+    }
+
+    protected void setEdgeLevel(SwipeBackLayout.EdgeLevel edgeLevel) {
+        mSwipeBackLayout.setEdgeLevel(edgeLevel);
+    }
+
+    protected void setEdgeLevel(int widthPixel) {
+        mSwipeBackLayout.setEdgeLevel(widthPixel);
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);

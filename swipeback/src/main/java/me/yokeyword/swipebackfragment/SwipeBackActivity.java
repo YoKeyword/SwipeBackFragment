@@ -48,6 +48,14 @@ public class SwipeBackActivity extends AppCompatActivity {
         mSwipeBackLayout.setLayoutParams(params);
     }
 
+    protected void setEdgeLevel(SwipeBackLayout.EdgeLevel edgeLevel) {
+        mSwipeBackLayout.setEdgeLevel(edgeLevel);
+    }
+
+    protected void setEdgeLevel(int widthPixel) {
+        mSwipeBackLayout.setEdgeLevel(widthPixel);
+    }
+
     public SwipeBackLayout getSwipeBackLayout() {
         return mSwipeBackLayout;
     }
